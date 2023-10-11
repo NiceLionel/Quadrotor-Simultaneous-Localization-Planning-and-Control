@@ -9,23 +9,6 @@ Welcome to my Autonomous VIO-based Quadcopter project! This repository showcases
 - ***Control Mechanism***: A robust control system is implemented to ensure the quadcopter adheres to the planned trajectory.
 - ***Visual Inertial Odometry (VIO)***: The cornerstone of this project, VIO enables the quadcopter to function even in environments devoid of GPS.
 
-## **Getting Started**
-
-1. ***Clone the Repository***:
-git clone https://github.com/NiceLionel/Quadrotor-Simultaneous-Localization-Planning-and-Control.git
-
-2. ***Setup***:
-Navigate to the project directory and install the necessary packages:
-
-cd Quadrotor-Simultaneous-Localization-Planning-and-Control
-python setup.py install
-
-4. ***Run the Simulation***:
-Launch the simulation and observe the quadcopter in action:
-
-python path_to_main_script.py
-
-
 ## **Features**
 
 - ***Simulator Implementation***: The simulator is designed to synthesize camera images based on the quadcopter's position, offering a lifelike flight experience.
