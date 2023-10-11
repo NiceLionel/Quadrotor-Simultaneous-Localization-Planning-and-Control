@@ -12,7 +12,6 @@ Welcome to my Autonomous VIO-based Quadcopter project! This repository showcases
 ## **Features**
 
 - ***Simulator Implementation***: The simulator is designed to synthesize camera images based on the quadcopter's position, offering a lifelike flight experience.
-- ***Extra Challenges***: For those seeking a deeper dive, challenges such as online mapping, monocular VIO, and VIO loop-closure have been incorporated. Dive in and explore!
 
 ## **Contributions**
 
