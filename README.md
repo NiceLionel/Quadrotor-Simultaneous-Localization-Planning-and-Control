@@ -13,7 +13,7 @@ Welcome to my Autonomous VIO-based Quadcopter project! This repository showcases
 
 1. ***Clone the Repository***:
 
-'''git clone https://github.com/NiceLionel/Quadrotor-Simultaneous-Localization-Planning-and-Control.git'''
+'''git clone https://github.com/NiceLionel/Quadrotor-Simultaneous-Localization-Planning-and-Control.git
 
 2. ***Setup***:
 Navigate to the project directory and install the necessary packages:
