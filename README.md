@@ -1,39 +1,38 @@
-Autonomous VIO-based Quadcopter
-Welcome to the Autonomous VIO-based Quadcopter project! This repository houses an advanced simulation and control system for a quadcopter using Visual Inertial Odometry (VIO). Dive in to explore how I integrated state estimation, trajectory planning, and control mechanisms to achieve a seamless flight experience in a simulated environment.
+# **Autonomous VIO-based Quadcopter**
 
-Simulation Image
+Welcome to my Autonomous VIO-based Quadcopter project! This repository showcases the culmination of my efforts in integrating state estimation, trajectory planning, and control mechanisms for a quadcopter using Visual Inertial Odometry (VIO). The project aims to provide a seamless flight experience in a simulated environment.
 
-(Replace path_to_simulation_image.png with the actual path to your simulation image if available)
+## **Highlights**
 
-Overview
-State Estimation: My quadcopter can estimate its state in real-time, even with noisy sensor data.
-Trajectory Planning: I've developed algorithms that allow the quadcopter to plan its flight trajectory efficiently.
-Control Mechanism: My control system ensures the quadcopter follows the planned trajectory with precision.
-Visual Inertial Odometry (VIO): The heart of this project, VIO allows the quadcopter to operate even in GPS-denied environments.
-Getting Started
-Clone the Repository:
+- ***State Estimation***: The quadcopter is equipped to estimate its state in real-time, even amidst noisy sensor data.
+- ***Trajectory Planning***: Advanced algorithms are in place to ensure the quadcopter plans its flight trajectory efficiently.
+- ***Control Mechanism***: A robust control system is implemented to ensure the quadcopter adheres to the planned trajectory.
+- ***Visual Inertial Odometry (VIO)***: The cornerstone of this project, VIO enables the quadcopter to function even in environments devoid of GPS.
 
-bash
-Copy code
+## **Getting Started**
+
+1. ***Clone the Repository***:
 git clone https://github.com/NiceLionel/Quadrotor-Simultaneous-Localization-Planning-and-Control.git
-Setup:
-Navigate to the project directory and install the required packages:
 
+2. ***Setup***:
+Navigate to the project directory and install the necessary packages:
 cd Quadrotor-Simultaneous-Localization-Planning-and-Control
 python setup.py install
-Run the Simulation:
-Kickstart the simulation and watch the quadcopter in action!
 
-bash
-Copy code
+3. ***Run the Simulation***:
+Launch the simulation and observe the quadcopter in action:
 python path_to_main_script.py
-(Replace path_to_main_script.py with the actual path to your main script if available)
 
-Features
-Simulator Implementation: My simulator synthesizes camera images based on the quadcopter's position, offering a realistic flight experience.
-Extra Challenges: For the enthusiasts out there, I've included challenges like online mapping, monocular VIO, and VIO loop-closure. Check them out!
-Contributing
-I appreciate contributions! If you have suggestions or improvements, feel free to fork this repository and submit a pull request. Let's make this quadcopter even better together!
 
-License
-This project is licensed under the MIT License.
+## **Features**
+
+- ***Simulator Implementation***: The simulator is designed to synthesize camera images based on the quadcopter's position, offering a lifelike flight experience.
+- ***Extra Challenges***: For those seeking a deeper dive, challenges such as online mapping, monocular VIO, and VIO loop-closure have been incorporated. Dive in and explore!
+
+## **Contributions**
+
+Your insights and contributions are always welcome! If you have suggestions, improvements, or feedback, please fork this repository and submit a pull request. Together, we can enhance this quadcopter project!
+
+## **License**
+
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
