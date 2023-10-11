@@ -37,6 +37,17 @@ class SE3Control(object):
 
         # STUDENT CODE HERE
 
+        self.gamma = self.k_drag / self.k_thrust
+
+
+        ## v =2.2
+        self.kr = np.diag([300, 300, 40])
+        self.kw = np.diag([25, 25, 15])
+        self.kd = np.diag([5, 5, 5])
+        self.kp = np.diag([13, 13, 13])
+
+
+
     def update(self, t, state, flat_output):
         """
         This function receives the current time, true state, and desired flat
@@ -71,9 +82,70 @@ class SE3Control(object):
         cmd_q = np.zeros((4,))
 
         # STUDENT CODE HERE
+        # Geometric Nonlinear Controller
+        # desired position
+        des_x = flat_output["x"]
+        # desired velocity
+        des_x_dot = flat_output["x_dot"]
+        # desired acceleration
+        des_x_ddot = flat_output["x_ddot"]
+        # desired jerk
+        des_x_dddot = flat_output["x_dddot"]
+        # desired snap
+        des_x_ddddot = flat_output["x_ddddot"]
+        # yaw angle
+        yaw = flat_output["yaw"]
+        # yaw rate
+        yaw_dot = flat_output["yaw_dot"]
+        # current position
+        cur_x = state["x"]
+        # current velocity
+        cur_x_dot = state["v"]
+        # current quaternion
+        i, j, k, w = state["q"]
+        # current angular velocity
+        p, q, r = state["w"]
 
-        control_input = {'cmd_motor_speeds':cmd_motor_speeds,
-                         'cmd_thrust':cmd_thrust,
-                         'cmd_moment':cmd_moment,
-                         'cmd_q':cmd_q}
+        # determine F_des
+        x_ddot_control = flat_output["x_ddot"] - self.kd @ (cur_x_dot - des_x_dot) - self.kp @ (cur_x - des_x)
+        F_des = self.mass * x_ddot_control.reshape(3, 1) + np.array([0, 0, self.mass * self.g]).reshape(3, 1)
+        # determine teh rotation matrix
+        R = Rotation.from_quat(state["q"]).as_matrix()
+        # determine u1
+        b3 = R @ np.array([0, 0, 1]).T
+        u1 = b3.T @ F_des
+        # determine R_des
+        b3_des = F_des / np.linalg.norm(F_des)
+        a_psi = np.array([np.cos(yaw), np.sin(yaw), 0]).reshape(3, 1)
+
+        b2_des = np.cross(b3_des, a_psi, axis=0) / np.linalg.norm(np.cross(b3_des, a_psi, axis=0))
+        R_des = np.concatenate((np.cross(b2_des, b3_des, axis=0), b2_des, b3_des), axis=1)
+        # calculate the orientation error
+        error_R_ = 1 / 2 * (R_des.T @ R - R.T @ R_des)
+        error_R = np.array([error_R_[2, 1], -error_R_[2, 0], error_R_[1, 0]]).reshape(3, 1)
+        # determine u2
+        w = np.array([p, q, r]).reshape(3, 1)
+        des_w = np.zeros((3, 1))
+        error_w = w - des_w
+        u2 = self.inertia @ (-self.kr @ error_R - self.kw @ error_w)
+        # calculate the input matrix
+        input_M = np.concatenate((u1.reshape(1, 1), u2), axis=0)
+        A = np.array([[1, 1, 1, 1],
+                      [0, self.arm_length, 0, -self.arm_length],
+                      [-self.arm_length, 0, self.arm_length, 0],
+                      [self.gamma, -self.gamma, self.gamma, -self.gamma]])
+        F, _, _, _ = np.linalg.lstsq(A, input_M)
+
+        cmd_motor_speeds = np.sqrt(F / self.k_thrust) * np.sign(F)
+        cmd_thrust = u1
+        cmd_moment = u2
+        cmd_q = Rotation.from_matrix(R_des).as_quat()
+
+        control_input = {'cmd_motor_speeds': cmd_motor_speeds,
+                         'cmd_thrust': cmd_thrust,
+                         'cmd_moment': cmd_moment,
+                         'cmd_q': cmd_q}
         return control_input
+
+
+
