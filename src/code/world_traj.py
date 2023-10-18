@@ -26,31 +26,11 @@ class WorldTraj(object):
 
         """
 
-        # You must choose resolution and margin parameters to use for path
-        # planning. In the previous project these were provided to you; now you
-        # must choose them for yourself. Your may try these default values, but
-        # you should experiment with them!
+        # choose resolution and margin parameters to use for path planning
+        
         self.resolution = np.array([0.2, 0.2, 0.2])
         self.margin = 0.5
 
-        # You must store the dense path returned from your Dijkstra or AStar
-        # graph search algorithm as an object member. You will need it for
-        # debugging, it will be used when plotting results.
-        self.path, _ = graph_search(world, self.resolution, self.margin, start, goal, astar=True)
-
-        # You must generate a sparse set of waypoints to fly between. Your
-        # original Dijkstra or AStar path probably has too many points that are
-        # too close together. Store these waypoints as a class member; you will
-        # need it for debugging and it will be used when plotting results.
-        # self.points = np.zeros((1,3)) # shape=(n_pts,3)
-
-        # Finally, you must compute a trajectory through the waypoints similar
-        # to your task in the first project. One possibility is to use the
-        # WaypointTraj object you already wrote in the first project. However,
-        # you probably need to improve it using techniques we have learned this
-        # semester.
-
-        # STUDENT CODE HERE
         self.points = self.path
         self.final_points = self.path[-1]
         self.number_point = self.points.shape[0]
@@ -78,8 +58,6 @@ class WorldTraj(object):
         x_ddddot = np.zeros((3,))
         yaw = 0
         yaw_dot = 0
-
-        # STUDENT CODE HERE
 
         direction = np.zeros((self.number_point - 1, 3))
         distance = np.zeros((self.number_point - 1, 3))
