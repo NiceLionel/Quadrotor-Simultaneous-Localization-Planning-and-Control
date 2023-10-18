@@ -35,7 +35,6 @@ class SE3Control(object):
         self.inertia = np.diag(np.array([self.Ixx, self.Iyy, self.Izz])) # kg*m^2
         self.g = 9.81 # m/s^2
 
-        # STUDENT CODE HERE
 
         self.gamma = self.k_drag / self.k_thrust
 
@@ -81,7 +80,6 @@ class SE3Control(object):
         cmd_moment = np.zeros((3,))
         cmd_q = np.zeros((4,))
 
-        # STUDENT CODE HERE
         # Geometric Nonlinear Controller
         # desired position
         des_x = flat_output["x"]
