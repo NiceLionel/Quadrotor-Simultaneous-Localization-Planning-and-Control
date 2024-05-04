@@ -1,4 +1,4 @@
-# **Autonomous VIO-based Quadcopter**
+# **Autonomous VIO-based Quadrotor**
 
 Welcome to my Autonomous VIO-based Quadcopter project! This repository showcases the culmination of my efforts in integrating state estimation, trajectory planning, and control mechanisms for a quadcopter using Visual Inertial Odometry (VIO). The project aims to provide a seamless flight experience in a simulated environment.
 
